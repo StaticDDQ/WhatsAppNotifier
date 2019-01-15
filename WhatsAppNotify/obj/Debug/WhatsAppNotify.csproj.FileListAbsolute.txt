@@ -1,0 +1,7 @@
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppNotify\WhatsAppNotify\bin\WhatsAppNotify.dll
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppNotify\WhatsAppNotify\bin\WhatsAppNotify.pdb
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppNotify\WhatsAppNotify\obj\Debug\WhatsAppNotify.csprojResolveAssemblyReference.cache
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppNotify\WhatsAppNotify\obj\Debug\WhatsAppNotify.dll
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppNotify\WhatsAppNotify\obj\Debug\WhatsAppNotify.pdb
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppNotify\WhatsAppNotify\bin\WebDriver.dll
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppNotify\WhatsAppNotify\bin\WebDriver.xml

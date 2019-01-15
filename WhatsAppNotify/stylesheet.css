@@ -1,0 +1,42 @@
+﻿body {
+}
+
+.phoneRange {
+    width: 200px;
+    height: 200px;
+    position:absolute;
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%, -50%);
+}
+
+.plusButton {
+    width: 100px;
+    height: 50px;
+    position:absolute;
+    left:40%;
+    top:75%;
+
+    transform: translate(-60%, -25%);
+}
+
+.minusButton {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+    left: 60%;
+    top: 75%;
+
+    transform: translate(-40%, -25%);
+}
+
+.sendButton {
+    width: 85px;
+    height: 50px;
+    position:absolute;
+    left: 50%;
+    top: 80%;
+
+    transform: translate(-50%, -20%);
+}

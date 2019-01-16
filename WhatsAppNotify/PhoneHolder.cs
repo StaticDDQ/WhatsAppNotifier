@@ -8,11 +8,16 @@ namespace WhatsAppNotify
 {
     public class PhoneHolder
     {
+        /// <summary>
+        /// Constructor that initialize list and instance of class to send
+        /// whatsapp message
+        /// </summary>
         private PhoneHolder()
         {
             tbs = new List<TextBox>();
-            sender = new WhatsAppAPISend();
         }
+
+        // Singleton pattern, only require one phoneholder
         private static PhoneHolder instance = null;
         public static PhoneHolder Instance
         {
@@ -26,8 +31,8 @@ namespace WhatsAppNotify
             }
         }
 
+        // stores textbox where they hold users phone numbers
         private List<TextBox> tbs;
-        private WhatsAppAPISend sender;
 
         public void Add(TextBox tb)
         {
@@ -39,12 +44,15 @@ namespace WhatsAppNotify
             return tbs;
         }
 
-        public void RemoveLastElement()
+        public TextBox RemoveLastElement()
         {
             if (tbs.Count > 1)
             {
-                tbs.RemoveAt(tbs.Count - 1);
+                TextBox boxRemoved = tbs[tbs.Count - 1];
+                tbs.Remove(boxRemoved);
+                return boxRemoved;
             }
+            return null;
         }
 
         public void ClearTBS()
@@ -52,18 +60,22 @@ namespace WhatsAppNotify
             tbs.Clear();
         }
 
-        public void NotifySender(List<TextBox> phoneNums, string message)
+        /// <summary>
+        /// Send a list of phone numbers, in string format, and a given message to another class
+        /// </summary>
+        /// <param name="message"></param>
+        public List<string> NotifySender()
         {
+            // get the text of each texbox
             List<string> nums = new List<string>();
-            foreach (TextBox box in phoneNums)
+            foreach (TextBox box in tbs)
             {
-                nums.Add(box.Text);
+                // skip empty textboxes
+                if(box.Text.Length > 0)
+                    nums.Add(box.Text);
             }
 
-            if (sender != null)
-            {
-                sender.run(nums, message);
-            }
+            return nums;
         }
     }
 }

@@ -5,3 +5,5 @@ C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppNotify\WhatsAppNo
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppNotify\WhatsAppNotify\obj\Debug\WhatsAppNotify.pdb
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppNotify\WhatsAppNotify\bin\WebDriver.dll
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppNotify\WhatsAppNotify\bin\WebDriver.xml
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppNotify\WhatsAppNotify\bin\WebDriver.Support.dll
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppNotify\WhatsAppNotify\bin\WebDriver.Support.xml

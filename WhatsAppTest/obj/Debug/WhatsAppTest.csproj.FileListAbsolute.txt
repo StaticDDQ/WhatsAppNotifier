@@ -1,0 +1,7 @@
+c:\users\19c0001\documents\visual studio 2012\Projects\WhatsAppTest\WhatsAppTest\bin\WhatsAppTest.dll
+c:\users\19c0001\documents\visual studio 2012\Projects\WhatsAppTest\WhatsAppTest\bin\WhatsAppTest.pdb
+c:\users\19c0001\documents\visual studio 2012\Projects\WhatsAppTest\WhatsAppTest\obj\Debug\WhatsAppTest.csprojResolveAssemblyReference.cache
+c:\users\19c0001\documents\visual studio 2012\Projects\WhatsAppTest\WhatsAppTest\obj\Debug\WhatsAppTest.dll
+c:\users\19c0001\documents\visual studio 2012\Projects\WhatsAppTest\WhatsAppTest\obj\Debug\WhatsAppTest.pdb
+c:\users\19c0001\documents\visual studio 2012\Projects\WhatsAppTest\WhatsAppTest\bin\WebDriver.dll
+c:\users\19c0001\documents\visual studio 2012\Projects\WhatsAppTest\WhatsAppTest\bin\WebDriver.xml

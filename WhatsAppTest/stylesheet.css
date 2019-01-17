@@ -1,0 +1,67 @@
+﻿body {
+}
+
+.phoneRange {
+    width: 200px;
+    height: 200px;
+    overflow-y:scroll;
+    position:absolute;
+    left:50%;
+    top:30%;
+    
+    transform:translate(-50%, -80%);
+}
+
+.messageSent {
+    overflow:auto;
+    width: 200px;
+    height: 150px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    transform:translate(-50%,-50%);
+}
+
+.plusButton {
+    width: 80px;
+    height: 50px;
+    position:absolute;
+    left:40%;
+    top:75%;
+    font-size: 200%;
+    transform: translate(-60%, -25%);
+}
+
+.minusButton {
+    width: 80px;
+    height: 50px;
+    position: absolute;
+    left: 60%;
+    top: 75%;
+    font-size: 200%;
+    transform: translate(-40%, -25%);
+}
+
+.sendButton {
+    width: 85px;
+    height: 50px;
+    position:absolute;
+    left: 50%;
+    top: 75%;
+
+    transform: translate(-50%, -25%);
+}
+
+.exitButton {
+
+    position:absolute;
+    left: 50%;
+    top: 90%;
+
+    transform: translate(-50%, 0%);
+}
+
+.numberSpace {
+    
+}

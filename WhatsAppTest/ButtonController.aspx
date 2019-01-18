@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ButtonController.aspx.cs" Inherits="WhatsAppNotify.ButtonController" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ButtonController.aspx.cs" Inherits="WhatsAppTest.ButtonController" %>
 
 <!DOCTYPE html>
 

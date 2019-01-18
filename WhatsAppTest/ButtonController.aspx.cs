@@ -5,9 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using WhatsAppNotify;
+using WhatsAppTest;
 
-namespace WhatsAppNotify
+namespace WhatsAppTest
 {
     public partial class ButtonController : System.Web.UI.Page
     {
@@ -41,15 +41,16 @@ namespace WhatsAppNotify
         /// <param name="e"></param>
         protected void sendBtn_Click(object sender, EventArgs e)
         {
+            
             string message = messageBox.Text;
-            //string messageServer = "HelloWorld";
 
+            //string messageServer = "HelloWorld";
             //message += "\n" + messageServer;
 
             List<string> convertedNums = PhoneHolder.Instance.ConvertStringList();
             if (convertedNums.Count > 0 && message.Length > 0)
             {
-               WhatsAppAPISend.Instance.Run(convertedNums, message);
+                TwilioSend.Instance.Run(convertedNums, message);
             }
         }
 
@@ -115,7 +116,6 @@ namespace WhatsAppNotify
 
         protected void ExitApp(object sender, EventArgs e)
         {
-            WhatsAppAPISend.Instance.CloseDriver();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Close_Window", "self.close();", true);
         }
     }

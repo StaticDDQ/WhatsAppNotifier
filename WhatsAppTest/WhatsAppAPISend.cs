@@ -3,10 +3,10 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using WhatsAppNotify;
+using WhatsAppTest;
 using System.Collections;
 
-namespace WhatsAppNotify
+namespace WhatsAppTest
 {
     public class WhatsAppAPISend
     {
@@ -17,7 +17,8 @@ namespace WhatsAppNotify
             options.AddArgument("user-data-dir=C://Users/"+username+"/AppData/Local/Google/Chrome/User Data/TempProfile");
         }
 
-        // Singleton pattern, only require one phoneholder
+        // Singleton pattern, only require one instance.
+        // Cannot have 1 whatsapp account be shared with multiple instances
         private static WhatsAppAPISend instance = null;
         public static WhatsAppAPISend Instance
         {

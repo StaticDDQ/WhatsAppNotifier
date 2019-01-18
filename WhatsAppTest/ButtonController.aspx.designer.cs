@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WhatsAppNotify {
+namespace WhatsAppTest {
     
     
     public partial class ButtonController {

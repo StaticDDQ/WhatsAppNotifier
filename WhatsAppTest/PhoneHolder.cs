@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 
-namespace WhatsAppNotify
+namespace WhatsAppTest
 {
     public class PhoneHolder
     {

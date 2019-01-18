@@ -12,13 +12,6 @@ namespace WhatsAppTest
     public partial class ButtonController : System.Web.UI.Page
     {
 
-        // get unique id for each phone number textbox
-        protected int phoneCount
-        {
-            get { return Convert.ToInt32(ViewState["count"] ?? "1"); }
-            set { ViewState["count"] = value; }
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -26,7 +19,8 @@ namespace WhatsAppTest
                 // empty the list and add first empty textbox
                 PhoneHolder.Instance.ClearTBS();
                 TextBox tb = new TextBox();
-                tb.ID = "enterPhone1";
+                tb.ID = "enterPhone0";
+                tb.CausesValidation = false;
                 PhoneHolder.Instance.Add(tb);
             }
             DrawTextBoxes();
@@ -41,7 +35,6 @@ namespace WhatsAppTest
         /// <param name="e"></param>
         protected void sendBtn_Click(object sender, EventArgs e)
         {
-            
             string message = messageBox.Text;
 
             //string messageServer = "HelloWorld";
@@ -70,8 +63,9 @@ namespace WhatsAppTest
             if (numLength > 0 && newNum.Text.All(c => c >= '0' && c <= '9'))
             {
                 TextBox tb = new TextBox();
-                tb.ID = "enterPhone" + (++phoneCount);
+                tb.ID = "enterPhone" + PhoneHolder.Instance.GetTBS().Count;
                 tb.CssClass = "numberSpace";
+                tb.CausesValidation = false;
                 PhoneHolder.Instance.Add(tb);
 
                 var to = new Label();
@@ -110,7 +104,6 @@ namespace WhatsAppTest
                 Panel1.Controls.Remove(box);
                 Label to = (Label)Panel1.FindControl(box.ID + "label");
                 Panel1.Controls.Remove(to);
-                phoneCount--;
             }
         }
 

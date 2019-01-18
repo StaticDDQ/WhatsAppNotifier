@@ -18,20 +18,25 @@
 <body>
     <form id="form1" runat="server">
         <div style="height: 370px">
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <asp:Panel ID="Panel1" runat="server" CssClass="phoneRange">
 
-            <asp:Panel ID="Panel1" runat="server" CssClass="phoneRange">
+                    </asp:Panel>
+                    <br />
+                
+                    <asp:TextBox ID="messageBox" runat="server" CssClass="messageSent" TextMode="MultiLine"/>
+              
+                    <br />
+                
+                    <asp:Button ID="addPhone" runat="server" OnClick="addPhone_Click" Text="+" CssClass="plusButton"/>
+                    <asp:Button ID="removePhone" runat="server" Text="-" OnClick="removePhone_Click" CssClass="minusButton"/>
+                    <asp:Button ID="sendBtn" runat="server" OnClick="sendBtn_Click" Text="Send" CssClass="sendButton" CausesValidation="false"/>
+                    <asp:Button ID="exit" runat="server" OnClick="ExitApp" Text="Exit" CssClass="exitButton" CausesValidation="false"/>
 
-            </asp:Panel>
-            <br />
-            <asp:TextBox ID="messageBox" runat="server" CssClass="messageSent" TextMode="MultiLine"/>
-            <br />
-            <asp:Button ID="addPhone" runat="server" OnClick="addPhone_Click" Text="+" CssClass="plusButton"/>
-            &nbsp;&nbsp;&nbsp;
-            <asp:Button ID="removePhone" runat="server" Text="-" OnClick="removePhone_Click" CssClass="minusButton"/>
-
-            <asp:Button ID="sendBtn" runat="server" OnClick="sendBtn_Click" Text="Send" CssClass="sendButton"/>
-
-            <asp:Button ID="exit" runat="server" OnClick="ExitApp" Text="Exit" CssClass="exitButton" />
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
     </form>
 </body>

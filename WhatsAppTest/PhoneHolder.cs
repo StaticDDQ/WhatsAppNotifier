@@ -46,6 +46,7 @@ namespace WhatsAppTest
 
         public TextBox RemoveLastElement()
         {
+            // must have atleast one textbox remaining
             if (tbs.Count > 1)
             {
                 TextBox boxRemoved = tbs[tbs.Count - 1];
@@ -70,7 +71,7 @@ namespace WhatsAppTest
             List<string> nums = new List<string>();
             foreach (TextBox box in tbs)
             {
-                // skip empty textboxes
+                // skip empty/invalid textboxes
                 if (box.Text.Length > 0 && box.Text.All(c => c >= '0' && c <= '9'))
                     nums.Add(box.Text);
             }

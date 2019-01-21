@@ -12,3 +12,10 @@ C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppTest\WhatsAppTest
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppTest\WhatsAppTest\obj\Debug\WhatsAppTest.pdb
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppTest\WhatsAppTest\bin\Twilio.AspNet.Common.dll
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppTest\WhatsAppTest\bin\WhatsAppApi.dll
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppTest\WhatsAppTest\bin\BigMath.dll
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppTest\WhatsAppTest\bin\CloudrailSI.dll
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppTest\WhatsAppTest\bin\Ionic.Zip.dll
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppTest\WhatsAppTest\bin\Ionic.ZLib.dll
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppTest\WhatsAppTest\bin\TeleSharp.TL.dll
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppTest\WhatsAppTest\bin\TLSharp.Core.dll
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WhatsAppTest\WhatsAppTest\bin\Ionic.Zip.xml

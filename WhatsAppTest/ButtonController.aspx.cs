@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using WhatsAppTest;
 
 namespace WhatsAppTest
 {
@@ -20,6 +19,7 @@ namespace WhatsAppTest
                 PhoneHolder.Instance.ClearTBS();
                 TextBox tb = new TextBox();
                 tb.ID = "enterPhone0";
+                tb.CssClass = "numberSpace";
                 tb.CausesValidation = false;
                 PhoneHolder.Instance.Add(tb);
             }
@@ -37,13 +37,10 @@ namespace WhatsAppTest
         {
             string message = messageBox.Text;
 
-            //string messageServer = "HelloWorld";
-            //message += "\n" + messageServer;
-
             List<string> convertedNums = PhoneHolder.Instance.ConvertStringList();
             if (convertedNums.Count > 0 && message.Length > 0)
             {
-                TwilioSend.Instance.Run(convertedNums, message);
+                TwilioSend.Instance.SendMessage(convertedNums, message);
             }
         }
 
@@ -55,7 +52,8 @@ namespace WhatsAppTest
         /// <param name="e"></param>
         protected void addPhone_Click(object sender, EventArgs e)
         {
-            TextBox newNum = PhoneHolder.Instance.GetTBS()[PhoneHolder.Instance.GetTBS().Count - 1];
+            var phoneHolderTBS = PhoneHolder.Instance.GetTBS();
+            TextBox newNum = phoneHolderTBS[phoneHolderTBS.Count - 1];
 
             int numLength = newNum.Text.Length;
 
@@ -63,17 +61,17 @@ namespace WhatsAppTest
             if (numLength > 0 && newNum.Text.All(c => c >= '0' && c <= '9'))
             {
                 TextBox tb = new TextBox();
-                tb.ID = "enterPhone" + PhoneHolder.Instance.GetTBS().Count;
+                tb.ID = "enterPhone" + phoneHolderTBS.Count;
                 tb.CssClass = "numberSpace";
                 tb.CausesValidation = false;
                 PhoneHolder.Instance.Add(tb);
 
                 var to = new Label();
-                to.Text = "To:";
+                to.Text = "To: ";
                 to.ID = tb.ID + "label";
                 to.CssClass = "to";
-                Panel1.Controls.Add(to);
-                Panel1.Controls.Add(tb);
+                phonePanel.Controls.Add(to);
+                phonePanel.Controls.Add(tb);
             }
         }
 
@@ -86,11 +84,11 @@ namespace WhatsAppTest
             foreach (TextBox tb in PhoneHolder.Instance.GetTBS())
             {
                 var to = new Label();
-                to.Text = "To:";
+                to.Text = "To: ";
                 to.ID = tb.ID + "label";
                 to.CssClass = "to";
-                Panel1.Controls.Add(to);
-                Panel1.Controls.Add(tb);
+                phonePanel.Controls.Add(to);
+                phonePanel.Controls.Add(tb);
             }
         }
 
@@ -101,15 +99,10 @@ namespace WhatsAppTest
             // if there is still more than 1 textboxes displayed
             if (box != null)
             {
-                Panel1.Controls.Remove(box);
-                Label to = (Label)Panel1.FindControl(box.ID + "label");
-                Panel1.Controls.Remove(to);
+                phonePanel.Controls.Remove(box);
+                Label to = (Label)phonePanel.FindControl(box.ID + "label");
+                phonePanel.Controls.Remove(to);
             }
-        }
-
-        protected void ExitApp(object sender, EventArgs e)
-        {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Close_Window", "self.close();", true);
         }
     }
 }

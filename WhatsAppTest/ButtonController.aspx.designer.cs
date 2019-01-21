@@ -49,22 +49,13 @@ namespace WhatsAppTest {
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// Panel1 control.
+        /// phonePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
-        
-        /// <summary>
-        /// messageBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox messageBox;
+        protected global::System.Web.UI.WebControls.Panel phonePanel;
         
         /// <summary>
         /// addPhone control.
@@ -85,6 +76,15 @@ namespace WhatsAppTest {
         protected global::System.Web.UI.WebControls.Button removePhone;
         
         /// <summary>
+        /// messageBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox messageBox;
+        
+        /// <summary>
         /// sendBtn control.
         /// </summary>
         /// <remarks>
@@ -92,14 +92,5 @@ namespace WhatsAppTest {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button sendBtn;
-        
-        /// <summary>
-        /// exit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button exit;
     }
 }

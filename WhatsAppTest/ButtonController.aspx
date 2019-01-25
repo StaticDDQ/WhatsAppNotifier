@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ButtonController.aspx.cs" Inherits="WhatsAppTest.ButtonController" %>
+﻿<%@ Page Language="C#" Async="true" AutoEventWireup="true" CodeBehind="ButtonController.aspx.cs" Inherits="WhatsAppTest.ButtonController" %>
 
 <!DOCTYPE html>
 
@@ -11,13 +11,21 @@
     <form id="form1" runat="server">
         <div>
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <script type="text/javascript" language="javascript">
+                Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
+                function EndRequestHandler(sender, args){
+                    if (args.get_error() != undefined){
+                        args.set_errorHandled(true);
+                    }
+                }
+            </script>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
                  
                     <asp:Panel ID="phonePanel" runat="server" CssClass="phoneRange">
                         <br />
                     </asp:Panel>
-
+                    
                     <asp:Button ID="addPhone" runat="server" OnClick="addPhone_Click" Text="+" CssClass="plusButton"/>
                     <asp:Button ID="removePhone" runat="server" Text="-" OnClick="removePhone_Click" CssClass="minusButton"/>
                     <br />

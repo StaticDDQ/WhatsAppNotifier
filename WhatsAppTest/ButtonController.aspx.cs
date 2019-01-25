@@ -37,10 +37,25 @@ namespace WhatsAppTest
         {
             string message = messageBox.Text;
 
+            //U7bc785c1a8454fd43fbf8a942ed6d652 LINE User ID    
+            
             List<string> convertedNums = PhoneHolder.Instance.ConvertStringList();
+
             if (convertedNums.Count > 0 && message.Length > 0)
             {
-                TwilioSend.Instance.SendMessage(convertedNums, message);
+                var fn = MessengerAPI.Instance.SendMessage("U7bc785c1a8454fd43fbf8a942ed6d652", message, true);
+
+                if (fn.Count > 0)
+                {
+                    string prompt = "Failed Numbers: " + fn[0];
+
+                    for(int i = 1; i < fn.Count; i++)
+                    {
+                        prompt += ", " + fn[i];
+                    }
+
+                    ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('" + prompt + "');", true);
+                }
             }
         }
 
@@ -75,6 +90,19 @@ namespace WhatsAppTest
             }
         }
 
+        protected void removePhone_Click(object sender, EventArgs e)
+        {
+            var box = PhoneHolder.Instance.RemoveLastElement();
+
+            // if there is still more than 1 textboxes displayed
+            if (box != null)
+            {
+                phonePanel.Controls.Remove(box);
+                Label to = (Label)phonePanel.FindControl(box.ID + "label");
+                phonePanel.Controls.Remove(to);
+            }
+        }
+
         /// <summary>
         /// For each page load, read all the textboxes and label
         /// to the page
@@ -89,19 +117,6 @@ namespace WhatsAppTest
                 to.CssClass = "to";
                 phonePanel.Controls.Add(to);
                 phonePanel.Controls.Add(tb);
-            }
-        }
-
-        protected void removePhone_Click(object sender, EventArgs e)
-        {
-            var box = PhoneHolder.Instance.RemoveLastElement();
-
-            // if there is still more than 1 textboxes displayed
-            if (box != null)
-            {
-                phonePanel.Controls.Remove(box);
-                Label to = (Label)phonePanel.FindControl(box.ID + "label");
-                phonePanel.Controls.Remove(to);
             }
         }
     }

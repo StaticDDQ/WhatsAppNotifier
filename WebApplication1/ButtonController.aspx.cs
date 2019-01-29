@@ -17,11 +17,11 @@ namespace MessagingTest
             {
                 // empty the list and add first empty textbox
                 PhoneHolder.Instance.ClearTBS();
-                TextBox tb = new TextBox();
-                tb.ID = "enterPhone0";
-                tb.CssClass = "numberSpace";
-                tb.CausesValidation = false;
-                PhoneHolder.Instance.Add(tb);
+                TextBox tb1 = new TextBox();
+                tb1.ID = "enterPhone0";
+                tb1.CssClass = "numberSpace";
+                tb1.CausesValidation = false;
+                PhoneHolder.Instance.Add(tb1);
             }
             DrawTextBoxes();
         }
@@ -39,7 +39,6 @@ namespace MessagingTest
 
             //U7bc785c1a8454fd43fbf8a942ed6d652 LINE User ID    
             //MessengerAPI.Instance.SendMessage("U7bc785c1a8454fd43fbf8a942ed6d652", message, true);
-
             
             List<string> convertedNums = PhoneHolder.Instance.ConvertStringList();
 
@@ -64,8 +63,8 @@ namespace MessagingTest
             {
                 strFn += ", " + fn[i];
             }
-
-            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + strFn + "');", true);
+            
+            ScriptManager.RegisterStartupScript(this, GetType(), "myalert", "alert('" + strFn + "');", true);
         }
 
         /// <summary>
@@ -94,6 +93,7 @@ namespace MessagingTest
                 to.Text = "To: ";
                 to.ID = tb.ID + "label";
                 to.CssClass = "to";
+
                 phonePanel.Controls.Add(to);
                 phonePanel.Controls.Add(tb);
             }
@@ -109,6 +109,12 @@ namespace MessagingTest
                 phonePanel.Controls.Remove(box);
                 Label to = (Label)phonePanel.FindControl(box.ID + "label");
                 phonePanel.Controls.Remove(to);
+            }
+            // else remove any text on the first textbox
+            else
+            {
+                var tb1 = (TextBox)phonePanel.FindControl("enterPhone0");
+                tb1.Text = "";
             }
         }
 

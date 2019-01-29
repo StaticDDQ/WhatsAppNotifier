@@ -2,64 +2,62 @@
 }
 
 .phoneRange {
-    width: 300px;
+    width: 350px;
     height: 222px;
     overflow-y:scroll;
     position:absolute;
     left:50%;
     transform:translate(-50%);
     top: 50px;
+    border:solid;
+    border-width:1.75px;
 }
 
 .messageSent {
     overflow:auto;
-    width: 300px;
+    width: 350px;
     height: 152px;
     position: absolute;
     left: 50%;
     top:370px;
-    font-size:15px;
+    font-size:20px;
     transform:translate(-50%);
+}
+
+textarea{
+    resize:none;
 }
 
 .plusButton {
     border-style: none;
-    border-color: inherit;
-    border-width: medium;
-    max-width:100%;
     width: 60px;
     height: 60px;
     position:absolute;
     left:40%;
-    top:290px;
+    top:295px;
     font-size: 250%;
     background-color:grey;
     color:white;
     display: inline-block;
-    transform:translate(-55%);
+    transform:translate(-60%);
 }
 
 .minusButton {
     border-style: none;
-    border-color: inherit;
-    border-width: medium;
-    max-width:100%;
     width: 60px;
     height: 60px;
     position: absolute;
     left: 60%;
-    top: 290px;
+    top: 295px;
     font-size: 250%;
     background-color:grey;
     color:white;
     display: inline-block;
-    transform:translate(-45%);
+    transform:translate(-40%);
 }
 
 .sendButton {
     border-style: none;
-    border-color: inherit;
-    border-width: medium;
     width: 85px;
     height: 50px;
     position:absolute;
@@ -75,8 +73,9 @@
 .numberSpace {
     position:relative;
     left:10px;
-    width:220px;
+    width:270px;
     height:25px;
+    font-size:18px;
 }
 
 .to {

@@ -6,7 +6,6 @@ C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplic
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.AspNet.WebHooks.Common.dll
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.AspNet.WebHooks.Custom.Api.dll
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.AspNet.WebHooks.Custom.dll
-C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.AspNet.WebHooks.Receivers.Azure.dll
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.AspNet.WebHooks.Receivers.Custom.dll
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.AspNet.WebHooks.Receivers.dll
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\Newtonsoft.Json.dll
@@ -19,7 +18,6 @@ C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplic
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.AspNet.WebHooks.Custom.xml
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.AspNet.WebHooks.Custom.Api.xml
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.AspNet.WebHooks.Receivers.xml
-C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.AspNet.WebHooks.Receivers.Azure.xml
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.AspNet.WebHooks.Receivers.Custom.xml
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\Newtonsoft.Json.pdb
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\Newtonsoft.Json.xml

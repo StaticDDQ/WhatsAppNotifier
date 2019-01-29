@@ -21,6 +21,8 @@ namespace MessagingTest
             config.InitializeCustomWebHooks();
             config.InitializeCustomWebHooksApis();
             config.InitializeReceiveCustomWebHooks();
+
+            config.EnsureInitialized();
         }
     }
 }

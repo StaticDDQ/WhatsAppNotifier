@@ -113,6 +113,9 @@ namespace MessagingTest
             CloseDriver();
         }
 
+        /// <summary>
+        /// Close a driver to prevent memory leak
+        /// </summary>
         public void CloseDriver()
         {
             if (driver != null)
@@ -120,6 +123,11 @@ namespace MessagingTest
                 driver.Quit();
                 driver = null;
             }
+        }
+
+        ~WhatsAppAPI()
+        {
+            CloseDriver();
         }
     }
 }

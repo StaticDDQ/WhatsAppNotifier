@@ -1,10 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-using System.Collections.Generic;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using MessagingTest;
-using System.Collections;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace MessagingTest
 {
@@ -89,7 +87,7 @@ namespace MessagingTest
         /// </summary>
         /// <param name="nums"> list of recipients to get the message</param>
         /// <param name="message"></param>
-        public void Run(List<string> phoneNumbers, string message)
+        public void SendMessage(List<string> phoneNumbers, string message)
         {
             // close browser if it is still opened
             CloseDriver();

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -10,6 +8,7 @@ namespace MessagingTest
 {
     public partial class ButtonController : System.Web.UI.Page
     {
+        private TextBox firstTB;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,21 +36,34 @@ namespace MessagingTest
         {
             string message = messageBox.Text;
 
-            //U7bc785c1a8454fd43fbf8a942ed6d652 LINE User ID    
-            //MessengerAPI.Instance.SendMessage("U7bc785c1a8454fd43fbf8a942ed6d652", message, true);
-            
             List<string> convertedNums = PhoneHolder.Instance.ConvertStringList();
-
             if (convertedNums.Count > 0 && message.Length > 0)
             {
-                var fn = TwilioAPI.Instance.SendMessage(convertedNums, message);
+                #region CloudRail
+                /*
+                //U7bc785c1a8454fd43fbf8a942ed6d652 LINE User ID 
+                var success = MessengerAPI.Instance.SendMessage("U7bc785c1a8454fd43fbf8a942ed6d652", message);
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "myalert", "alert('Message sent: " + success + "');", true);
+                */
+                #endregion
+
+                #region Twilio
+                /*var fn = TwilioAPI.Instance.SendMessage(convertedNums, message);
 
                 // if some numbers failed to get message
                 if (fn.Count > 0)
                 {
                     AlertFailedNumbers(fn);
-                }
-            }
+                }*/
+                #endregion
+
+                #region Selenium Webdriver
+
+                WhatsAppAPI.Instance.SendMessage(convertedNums, message);
+
+                #endregion
+            }            
         }
 
         // Create message box and list all failed phone numbers
@@ -113,8 +125,7 @@ namespace MessagingTest
             // else remove any text on the first textbox
             else
             {
-                var tb1 = (TextBox)phonePanel.FindControl("enterPhone0");
-                tb1.Text = "";
+                firstTB.Text = "";
             }
         }
 
@@ -124,6 +135,7 @@ namespace MessagingTest
         /// </summary>
         private void DrawTextBoxes()
         {
+            firstTB = PhoneHolder.Instance.GetTBS()[0];
             foreach (TextBox tb in PhoneHolder.Instance.GetTBS())
             {
                 var to = new Label();

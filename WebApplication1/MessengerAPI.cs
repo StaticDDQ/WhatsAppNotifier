@@ -4,15 +4,12 @@ using Com.CloudRail.SI.Services;
 using Com.CloudRail.SI.Types;
 
 using System;
-using System.Configuration;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 
 namespace MessagingTest
 {
-    public class MessengerAPI
+    public class MessengerAPI : Messageable<string>
     {
         private static MessengerAPI instance = null;
         public static MessengerAPI Instance
@@ -34,16 +31,9 @@ namespace MessagingTest
         /// <param name="message"></param>
         /// <param name="useLine"></param>
         /// <returns></returns>
-        public bool SendMessage(string userID, string message, bool useLine)
+        public bool SendMessage(string userID, string message)
         {
-            // Using cloudrail service
-            CloudRail.AppKey = "5c454f1421b62e5228da6b18";
-
-            // Locate bot accounts Line and Telegram
-            Line line = new Line(null, "Nt1tBYsLrnyq/NbS6C1oWhSt9FSwpG3sKL01xGkapDK43Ly68F5bi4fq7Zz39RsmSEYDGbdpTRTHECTaZfJwu7sjeefV0DstGqgpJXoMvtoQ0BJVwuMAD8zY07fiZfro03DbQcyALMO2PNzpp3F6DwdB04t89/1O/w1cDnyilFU=");
-            Telegram telegram = new Telegram(null, "737341810:AAGN82CUC2pWVdUH7G0oJVEnqQC4dV4d7Mc", "");
-
-            service = (useLine) ? (IMessaging) line : telegram;
+            Init(true);
 
             // To check if user id is valid
             try
@@ -56,6 +46,49 @@ namespace MessagingTest
                 Debug.WriteLine(e.Message);
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Iterate through each number using cloudrail sdk
+        /// </summary>
+        /// <param name="phoneNumbers"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public List<string> SendMessage(List<string> phoneNumbers, string message)
+        {
+            Init(true);
+
+            List<string> failedNumbers = new List<string>();
+
+            foreach (string number in phoneNumbers)
+            {
+                try
+                {
+                    Message result = service.SendMessage(number, message);
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                    failedNumbers.Add(number);
+                }
+            }
+
+            return failedNumbers;
+        }
+
+        /// <summary>
+        /// Initialize cloudrail account and login service
+        /// </summary>
+        /// <param name="useLine">choose either line or telegram</param>
+        private void Init(bool useLine)
+        {
+            CloudRail.AppKey = "5c454f1421b62e5228da6b18";
+
+            // Locate bot accounts Line and Telegram using bot token
+            Line line = new Line(null, "Nt1tBYsLrnyq/NbS6C1oWhSt9FSwpG3sKL01xGkapDK43Ly68F5bi4fq7Zz39RsmSEYDGbdpTRTHECTaZfJwu7sjeefV0DstGqgpJXoMvtoQ0BJVwuMAD8zY07fiZfro03DbQcyALMO2PNzpp3F6DwdB04t89/1O/w1cDnyilFU=");
+            Telegram telegram = new Telegram(null, "737341810:AAGN82CUC2pWVdUH7G0oJVEnqQC4dV4d7Mc", "");
+
+            service = (useLine) ? (IMessaging)line : telegram;
         }
     }
 }

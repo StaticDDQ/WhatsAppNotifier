@@ -6,7 +6,7 @@ using Twilio.Types;
 
 namespace MessagingTest
 {
-    public class TwilioAPI
+    public class TwilioAPI : Messageable<string>
     {
         private TwilioAPI() {}
 
@@ -25,8 +25,8 @@ namespace MessagingTest
         }
 
         // if possible, store this in server
-        private const string accountSID = "ACf29fb18d76781675f051500c7444758e";
-        private const string token = "0f764e8bed0f55d7a98b1f1ce3eb5de4";
+        private const string accountSID = "ACa51e68669a0d5ea0f490887f0c236aab";
+        private const string token = "0ebf6936e63ec4efaa1bac7d4e7c3c39";
 
         /// <summary>
         /// Initialize twilio using given SID and token.

@@ -112,6 +112,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ButtonController.aspx" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="stylesheet.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -126,6 +131,7 @@
       <DependentUpon>ButtonController.aspx</DependentUpon>
     </Compile>
     <Compile Include="Handler.cs" />
+    <Compile Include="Messageable.cs" />
     <Compile Include="MessengerAPI.cs" />
     <Compile Include="PhoneHolder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -136,6 +142,8 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Properties\webjobs-list.json" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

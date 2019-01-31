@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
@@ -25,8 +26,8 @@ namespace MessagingTest
         }
 
         // if possible, store this in server
-        private const string accountSID = "ACa51e68669a0d5ea0f490887f0c236aab";
-        private const string token = "0ebf6936e63ec4efaa1bac7d4e7c3c39";
+        private const string ACCSID = "ACf29fb18d76781675f051500c7444758e";
+        private const string TOKEN = "0f764e8bed0f55d7a98b1f1ce3eb5de4";
 
         /// <summary>
         /// Initialize twilio using given SID and token.
@@ -37,7 +38,7 @@ namespace MessagingTest
         /// <param name="message"></param>
         public List<string> SendMessage(List<string> phoneNumbers, string message)
         {
-            TwilioClient.Init(accountSID, token);
+            TwilioClient.Init(ACCSID, TOKEN);
             List<string> failedNumbers = new List<string>();
 
             foreach (string number in phoneNumbers)
@@ -49,7 +50,7 @@ namespace MessagingTest
                 
                 System.Threading.Thread.Sleep(2000);
             }
-
+            
             return failedNumbers;
         }
 
@@ -62,7 +63,7 @@ namespace MessagingTest
         /// <param name="message"></param>
         public bool SendMessage(string phoneNumber, string message)
         {
-            TwilioClient.Init(accountSID, token);
+            TwilioClient.Init(ACCSID, TOKEN);
 
             return RunTwilio(phoneNumber, message);
         }
@@ -86,7 +87,7 @@ namespace MessagingTest
             // if phone number is valid
             try
             {
-                MessageResource.Create(messageOption);
+                 MessageResource.Create(messageOption);
                 return true;
             }
             catch (Exception e)

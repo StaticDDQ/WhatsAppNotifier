@@ -59,7 +59,7 @@ namespace MessagingTest
         {
             try
             {
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(18); //Wait for maximun of 10 seconds if any element is not found
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15); //Wait for maximun of 15 seconds if any element is not found
                 driver.Navigate().GoToUrl("https://api.whatsapp.com/send?phone=" + phoneNumber + "&text=" + Uri.EscapeDataString(message));
                 
                 driver.FindElement(By.Id("action-button")).Click(); // Click SEND Buton

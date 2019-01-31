@@ -40,27 +40,27 @@ namespace MessagingTest
             if (convertedNums.Count > 0 && message.Length > 0)
             {
                 #region CloudRail
-                /*
+                
                 //U7bc785c1a8454fd43fbf8a942ed6d652 LINE User ID 
                 var success = MessengerAPI.Instance.SendMessage("U7bc785c1a8454fd43fbf8a942ed6d652", message);
 
                 ScriptManager.RegisterStartupScript(this, GetType(), "myalert", "alert('Message sent: " + success + "');", true);
-                */
+                
                 #endregion
 
                 #region Twilio
-                /*var fn = TwilioAPI.Instance.SendMessage(convertedNums, message);
+                var fn = TwilioAPI.Instance.SendMessage(convertedNums, message);
 
                 // if some numbers failed to get message
                 if (fn.Count > 0)
                 {
                     AlertFailedNumbers(fn);
-                }*/
+                }
                 #endregion
 
                 #region Selenium Webdriver
 
-                WhatsAppAPI.Instance.SendMessage(convertedNums, message);
+                //WhatsAppAPI.Instance.SendMessage(convertedNums, message);
 
                 #endregion
             }            

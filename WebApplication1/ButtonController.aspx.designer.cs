@@ -49,6 +49,24 @@ namespace MessagingTest {
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
+        /// text control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton text;
+        
+        /// <summary>
+        /// file control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton file;
+        
+        /// <summary>
         /// phonePanel control.
         /// </summary>
         /// <remarks>
@@ -74,6 +92,15 @@ namespace MessagingTest {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button removePhone;
+        
+        /// <summary>
+        /// uploadSpace control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AsyncFileUpload uploadSpace;
         
         /// <summary>
         /// messageBox control.

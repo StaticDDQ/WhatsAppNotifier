@@ -1,7 +1,4 @@
-﻿body {
-}
-
-.phoneRange {
+﻿.phoneRange {
     width: 350px;
     height: 222px;
     overflow-y:scroll;
@@ -22,10 +19,6 @@
     top:370px;
     font-size:20px;
     transform:translate(-50%);
-}
-
-textarea{
-    resize:none;
 }
 
 .plusButton {

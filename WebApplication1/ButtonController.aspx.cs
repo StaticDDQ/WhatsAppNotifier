@@ -1,14 +1,17 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Diagnostics;
 
 namespace MessagingTest
 {
     public partial class ButtonController : System.Web.UI.Page
     {
         private TextBox firstTB;
+        private static string filePath;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,6 +24,7 @@ namespace MessagingTest
                 tb1.CssClass = "numberSpace";
                 tb1.CausesValidation = false;
                 PhoneHolder.Instance.Add(tb1);
+                filePath = "";
             }
             DrawTextBoxes();
         }
@@ -36,39 +40,47 @@ namespace MessagingTest
         {
             string message = messageBox.Text;
 
-            List<string> convertedNums = PhoneHolder.Instance.ConvertStringList();
-            if (convertedNums.Count > 0 && message.Length > 0)
-            {
-                #region CloudRail
-                
-                //U7bc785c1a8454fd43fbf8a942ed6d652 LINE User ID 
-                var success = MessengerAPI.Instance.SendMessage("U7bc785c1a8454fd43fbf8a942ed6d652", message);
-
-                ScriptManager.RegisterStartupScript(this, GetType(), "myalert", "alert('Message sent: " + success + "');", true);
-                
-                #endregion
-
-                #region Twilio
-                var fn = TwilioAPI.Instance.SendMessage(convertedNums, message);
-
-                // if some numbers failed to get message
-                if (fn.Count > 0)
+            if (text.Checked)
+            {   
+                List<string> convertedNums = PhoneHolder.Instance.ConvertStringList();
+                if (convertedNums.Count > 0 && message.Length > 0)
                 {
-                    AlertFailedNumbers(fn);
-                }
-                #endregion
+                    #region CloudRail
 
-                #region Selenium Webdriver
+                    //U7bc785c1a8454fd43fbf8a942ed6d652 LINE User ID 
+                    var success = MessengerAPI.Instance.SendMessage("U7bc785c1a8454fd43fbf8a942ed6d652", message);
 
-                //WhatsAppAPI.Instance.SendMessage(convertedNums, message);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "myalert", "alert('Message sent: " + success + "');", true);
 
-                #endregion
-            }            
+                    #endregion
+
+                    #region Twilio
+                    var fn = TwilioAPI.Instance.SendMessage(convertedNums, message);
+
+                    // if some numbers failed to get message
+                    if (fn.Count > 0)
+                    {
+                        AlertFailedNumbers(fn);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "myalert", "alert('Message sent: True');", true);
+                    }
+                    #endregion
+                }  
+            }
+            else
+            {
+                if(filePath.Length > 0)
+                    Debug.WriteLine(filePath);
+            }
+              
         }
 
         // Create message box and list all failed phone numbers
         private void AlertFailedNumbers(List<string> fn)
         {
+            
             string strFn = "Failed numbers: " + fn[0];
 
             for (int i = 1; i < fn.Count; i++)
@@ -145,6 +157,24 @@ namespace MessagingTest
                 phonePanel.Controls.Add(to);
                 phonePanel.Controls.Add(tb);
             }
+        }
+
+        protected void FileUploadComplete(object sender, EventArgs e)
+        {
+            
+            filePath = Path.GetFullPath(uploadSpace.FileName);
+        }
+
+        protected void text_CheckedChanged(object sender, EventArgs e)
+        {
+            messageBox.Style["display"] = "inline-block";
+            uploadSpace.Style["display"] = "none";
+        }
+
+        protected void file_CheckedChanged(object sender, EventArgs e)
+        {
+            messageBox.Style["display"] = "none";
+            uploadSpace.Style["display"] = "inline-block";
         }
     }
 }

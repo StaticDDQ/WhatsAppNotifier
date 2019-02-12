@@ -1,4 +1,3 @@
-C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\MessagingTest.dll.config
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\MessagingTest.dll
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\MessagingTest.pdb
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\CloudrailSI.dll
@@ -30,3 +29,4 @@ C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplic
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\obj\Debug\MessagingTest.dll
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\obj\Debug\MessagingTest.pdb
 C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\AjaxControlToolkit.dll
+C:\Users\19C0001\Documents\Visual Studio 2012\Projects\WebApplication1\WebApplication1\bin\MessagingTest.dll.config

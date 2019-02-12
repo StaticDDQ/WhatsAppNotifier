@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
 
@@ -52,6 +53,19 @@ namespace MessagingTest
                 return boxRemoved;
             }
             return null;
+        }
+
+        public bool RemoveElement(TextBox tb)
+        {
+            try
+            {
+                tbs.Remove(tb);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public void ClearTBS()

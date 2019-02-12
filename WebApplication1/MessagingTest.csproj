@@ -115,7 +115,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ButtonController.aspx" />
+    <Content Include="Messaging.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -129,14 +129,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ButtonController.aspx.cs">
-      <DependentUpon>ButtonController.aspx</DependentUpon>
+    <Compile Include="APIChooser.cs" />
+    <Compile Include="Messaging.aspx.cs">
+      <DependentUpon>Messaging.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ButtonController.aspx.designer.cs">
-      <DependentUpon>ButtonController.aspx</DependentUpon>
+    <Compile Include="Messaging.aspx.designer.cs">
+      <DependentUpon>Messaging.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Handler.cs" />
     <Compile Include="Messageable.cs" />
     <Compile Include="MessengerAPI.cs" />
     <Compile Include="PhoneHolder.cs" />

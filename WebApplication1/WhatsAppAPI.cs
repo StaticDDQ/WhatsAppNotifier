@@ -6,28 +6,13 @@ using System.Diagnostics;
 
 namespace MessagingTest
 {
-    public class WhatsAppAPI
+    public class WhatsAppAPI : Messageable<string>
     {
-        private WhatsAppAPI()
+        public WhatsAppAPI()
         {
             string username = System.Environment.GetEnvironmentVariable("USERNAME");
             options = new ChromeOptions();
             options.AddArgument("user-data-dir=C://Users/"+username+"/AppData/Local/Google/Chrome/User Data/TempProfile");
-        }
-
-        // Singleton pattern, only require one instance.
-        // Cannot have 1 whatsapp account be shared with multiple instances
-        private static WhatsAppAPI instance = null;
-        public static WhatsAppAPI Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new WhatsAppAPI();
-
-                } return instance;
-            }
         }
 
         private IWebDriver driver;
@@ -55,7 +40,7 @@ namespace MessagingTest
         /// </summary>
         /// <param name="phoneNumber"></param>
         /// <param name="message"></param>
-        private void SendMessage(string phoneNumber, string message)
+        public bool SendMessage(string phoneNumber, string message)
         {
             try
             {
@@ -68,16 +53,18 @@ namespace MessagingTest
                 try
                 {
                     driver.FindElement(By.CssSelector("button._35EW6")).SendKeys(Keys.Enter);//Click SEND Arrow Button
+                    return true;
                 }
                 catch (Exception e)
                 {
                     Debug.WriteLine(e.Message);
-                    return;
+                    return false;
                 }
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
+                return false;
             }
         }
 
@@ -87,11 +74,11 @@ namespace MessagingTest
         /// </summary>
         /// <param name="nums"> list of recipients to get the message</param>
         /// <param name="message"></param>
-        public void SendMessage(List<string> phoneNumbers, string message)
+        public List<string> SendMessage(List<string> phoneNumbers, string message)
         {
             // close browser if it is still opened
             CloseDriver();
-
+            List<string> failedNumbers = new List<string>();
             driver = new ChromeDriver(options);
 
             driver.Navigate().GoToUrl("https://web.whatsapp.com");
@@ -104,11 +91,16 @@ namespace MessagingTest
 
             foreach (string num in phoneNumbers)
             {
-                SendMessage(num, message);
+                if (!SendMessage(num, message))
+                {
+                    failedNumbers.Add(num);
+                }
                 System.Threading.Thread.Sleep(5000);
             }
 
             CloseDriver();
+
+            return failedNumbers;
         }
 
         /// <summary>

@@ -1,0 +1,196 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace MessagingTest
+{
+    public partial class ButtonController : System.Web.UI.Page
+    {
+        private TextBox firstTB;
+        private static string filePath;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                // empty the list and add first empty textbox
+                PhoneHolder.Instance.ClearTBS();
+                TextBox tb1 = new TextBox();
+                tb1.ID = "enterPhone0";
+                tb1.CssClass = "numberSpace";
+                tb1.CausesValidation = false;
+                PhoneHolder.Instance.Add(tb1);
+                filePath = "";
+            }
+            DrawTextBoxes();
+        }
+
+        /// <summary>
+        /// Have phoneholder convert list of textbox to be list of string.
+        /// Send list to WhatsAppAPISend to carry out whatsapp messaging.
+        /// Message is obtained from message box.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void sendBtn_Click(object sender, EventArgs e)
+        {
+            string message = messageBox.Text;
+
+            if (text.Checked)
+            {   
+                List<string> convertedNums = PhoneHolder.Instance.ConvertStringList();
+                if (convertedNums.Count > 0 && message.Length > 0)
+                {
+
+                    //U7bc785c1a8454fd43fbf8a942ed6d652 LINE User ID 
+                    //717755903 Telegram User ID
+                    //var success = APIChooser.Instance.AlertAPI(1,message,"U7bc785c1a8454fd43fbf8a942ed6d652");
+
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "myalert", "alert('Message sent: " + success + "');", true);
+
+                    var fn = APIChooser.Instance.AlertAPI(3 , message, convertedNums);
+
+                    // if some numbers failed to get message
+                    if (fn.Count > 0)
+                    {
+                        AlertFailedNumbers(fn);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "myalert", "alert('Message sent: True');", true);
+                    }
+                }  
+            }
+            else
+            {
+                // if a file is selected
+                if (filePath.Length > 0)
+                {
+                    string status;
+                    try
+                    {
+                        if (uploadSpace.PostedFile.ContentType == "image/jpeg")
+                        {
+                            uploadSpace.SaveAs(Server.MapPath("~/") + filePath);
+                            status = "File Uploaded";
+
+                        }
+                        else
+                        {
+                            status = "File not an image";
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        status = "File Upload Failed";
+                    }
+                    ScriptManager.RegisterStartupScript(this, GetType(), "myalert", "alert('"+status+"');", true);
+                    filePath = "";
+                }
+            }
+        }
+
+        // Create message box and list all failed phone numbers
+        private void AlertFailedNumbers(List<string> fn)
+        {
+            
+            string strFn = "Failed numbers: " + fn[0];
+
+            for (int i = 1; i < fn.Count; i++)
+            {
+                strFn += ", " + fn[i];
+            }
+            
+            ScriptManager.RegisterStartupScript(this, GetType(), "myalert", "alert('" + strFn + "');", true);
+        }
+
+        /// <summary>
+        /// Get the latest textbox made, check if text is valid.
+        /// Add it to the list and render another textbox and label.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void addPhone_Click(object sender, EventArgs e)
+        {
+            var phoneHolderTBS = PhoneHolder.Instance.GetTBS();
+            TextBox newNum = phoneHolderTBS[phoneHolderTBS.Count - 1];
+
+            int numLength = newNum.Text.Length;
+
+            // for now, check if all in digits and non empty
+            if (numLength > 0 && newNum.Text.All(c => c >= '0' && c <= '9'))
+            {
+                TextBox tb = new TextBox();
+                tb.ID = "enterPhone" + phoneHolderTBS.Count;
+                tb.CssClass = "numberSpace";
+                tb.CausesValidation = false;
+                PhoneHolder.Instance.Add(tb);
+
+                var to = new Label();
+                to.Text = "To: ";
+                to.ID = tb.ID + "label";
+                to.CssClass = "to";
+
+                phonePanel.Controls.Add(to);
+                phonePanel.Controls.Add(tb);
+            }
+        }
+
+        protected void removePhone_Click(object sender, EventArgs e)
+        {
+    
+            var box = PhoneHolder.Instance.RemoveLastElement();
+
+            // if there is still more than 1 textboxes displayed
+            if (box != null)
+            {
+                phonePanel.Controls.Remove(box);
+                Label to = (Label)phonePanel.FindControl(box.ID + "label");
+                phonePanel.Controls.Remove(to);
+            }
+            // else remove any text on the first textbox
+            else
+            {
+                firstTB.Text = "";
+            }
+        }
+
+        /// <summary>
+        /// For each page load, read all the textboxes and label
+        /// to the page
+        /// </summary>
+        private void DrawTextBoxes()
+        {
+            firstTB = PhoneHolder.Instance.GetTBS()[0];
+            foreach (TextBox tb in PhoneHolder.Instance.GetTBS())
+            {
+                var to = new Label();
+                to.Text = "To: ";
+                to.ID = tb.ID + "label";
+                to.CssClass = "to";
+                phonePanel.Controls.Add(to);
+                phonePanel.Controls.Add(tb);
+            }
+        }
+
+        protected void FileUploadComplete(object sender, EventArgs e)
+        {
+            filePath = Path.GetFileName(uploadSpace.FileName);
+        }
+
+        protected void text_CheckedChanged(object sender, EventArgs e)
+        {
+            messageBox.Style["display"] = "inline-block";
+            uploadSpace.Style["display"] = "none";
+        }
+
+        protected void file_CheckedChanged(object sender, EventArgs e)
+        {
+            messageBox.Style["display"] = "none";
+            uploadSpace.Style["display"] = "inline-block";
+        }
+    }
+}

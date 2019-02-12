@@ -11,17 +11,6 @@ namespace MessagingTest
 {
     public class MessengerAPI : Messageable<string>
     {
-        private static MessengerAPI instance = null;
-        public static MessengerAPI Instance
-        {
-            get
-            {
-                if (instance == null)
-                    instance = new MessengerAPI();
-                return instance;
-            }
-        }
-
         private static IMessaging service;
 
         /// <summary>
@@ -86,7 +75,7 @@ namespace MessagingTest
 
             // Locate bot accounts Line and Telegram using bot token
             Line line = new Line(null, "Nt1tBYsLrnyq/NbS6C1oWhSt9FSwpG3sKL01xGkapDK43Ly68F5bi4fq7Zz39RsmSEYDGbdpTRTHECTaZfJwu7sjeefV0DstGqgpJXoMvtoQ0BJVwuMAD8zY07fiZfro03DbQcyALMO2PNzpp3F6DwdB04t89/1O/w1cDnyilFU=");
-            Telegram telegram = new Telegram(null, "737341810:AAGN82CUC2pWVdUH7G0oJVEnqQC4dV4d7Mc", "");
+            Telegram telegram = new Telegram(null, "766364749:AAGI8yDvdNA_VWgXBYF8KFqdvohWid1o3k", "");
 
             service = (useLine) ? (IMessaging)line : telegram;
         }

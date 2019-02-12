@@ -8,21 +8,6 @@ namespace MessagingTest
 {
     public class TwilioAPI : Messageable<string>
     {
-        private TwilioAPI() {}
-
-        // Only require one instance for sending messages
-        private static TwilioAPI instance = null;
-        public static TwilioAPI Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new TwilioAPI();
-                }
-                return instance;
-            }
-        }
 
         // if possible, store this in server
         private const string ACCSID = "ACf29fb18d76781675f051500c7444758e";

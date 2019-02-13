@@ -10,7 +10,7 @@
 namespace MessagingTest {
     
     
-    public partial class ButtonController {
+    public partial class Messaging {
         
         /// <summary>
         /// Head1 control.

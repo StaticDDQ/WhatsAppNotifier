@@ -81,6 +81,7 @@ namespace MessagingTest
         {
             // get the text of each textbox
             List<string> nums = new List<string>();
+            
             foreach (TextBox box in tbs)
             {
                 // skip empty/invalid textboxes

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Async="true" AutoEventWireup="true" CodeBehind="Messaging.aspx.cs" Inherits="MessagingTest.ButtonController" %>
+﻿<%@ Page Language="C#" Async="true" AutoEventWireup="true" CodeBehind="Messaging.aspx.cs" Inherits="MessagingTest.Messaging" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
@@ -8,9 +8,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title></title>
-    <link href="stylesheet.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <link href="stylesheet.css" rel="stylesheet" type="text/css" />
     <form id="form1" runat="server">
         <div style="height: 614px">
             <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
@@ -40,13 +40,6 @@
                     <asp:PostBackTrigger ControlID="sendBtn" />
                 </Triggers>
             </asp:UpdatePanel>
-            <script type="text/javascript">
-
-                function clearTextBox() {
-                    document.getElementById("messageBox").value = "123";
-                }
-
-            </script>
         </div>
     </form>
 </body>

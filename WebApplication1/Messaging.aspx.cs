@@ -1,16 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace MessagingTest
 {
-    public partial class ButtonController : System.Web.UI.Page
+    public partial class Messaging : System.Web.UI.Page
     {
         private TextBox firstTB;
-        private static string filePath;
+        private int counter
+        {
+            get
+            {
+                if (ViewState["count"] == null)
+                {
+                    ViewState["count"] = 1;
+                }
+                return (int)ViewState["count"];
+            }
+            set
+            {
+                ViewState["count"] = value;
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,13 +33,41 @@ namespace MessagingTest
                 // empty the list and add first empty textbox
                 PhoneHolder.Instance.ClearTBS();
                 TextBox tb1 = new TextBox();
+                
                 tb1.ID = "enterPhone0";
+
                 tb1.CssClass = "numberSpace";
                 tb1.CausesValidation = false;
                 PhoneHolder.Instance.Add(tb1);
                 filePath = "";
             }
             DrawTextBoxes();
+        }
+
+        /// <summary>
+        /// For each page load, read all the textboxes and label
+        /// to the page
+        /// </summary>
+        private void DrawTextBoxes()
+        {
+            firstTB = PhoneHolder.Instance.GetTBS()[0];
+            foreach (TextBox tb in PhoneHolder.Instance.GetTBS())
+            {
+                var to = new Label();
+                to.Text = "To: ";
+                to.ID = tb.ID + "label";
+                to.CssClass = "to";
+
+                var deleteBtn = new Button();
+                deleteBtn.Text = "X";
+                deleteBtn.ID = tb.ID + "button";
+                deleteBtn.CssClass = "delete";
+                deleteBtn.Click += new EventHandler(deleteBtn_Click);
+
+                phonePanel.Controls.Add(to);
+                phonePanel.Controls.Add(tb);
+                phonePanel.Controls.Add(deleteBtn);
+            }
         }
 
         /// <summary>
@@ -37,21 +79,18 @@ namespace MessagingTest
         /// <param name="e"></param>
         protected void sendBtn_Click(object sender, EventArgs e)
         {
-            string message = messageBox.Text;
-
             if (text.Checked)
-            {   
+            {
+                string message = messageBox.Text;
+
                 List<string> convertedNums = PhoneHolder.Instance.ConvertStringList();
                 if (convertedNums.Count > 0 && message.Length > 0)
                 {
 
                     //U7bc785c1a8454fd43fbf8a942ed6d652 LINE User ID 
                     //717755903 Telegram User ID
-                    //var success = APIChooser.Instance.AlertAPI(1,message,"U7bc785c1a8454fd43fbf8a942ed6d652");
-
-                    //ScriptManager.RegisterStartupScript(this, GetType(), "myalert", "alert('Message sent: " + success + "');", true);
-
-                    var fn = APIChooser.Instance.AlertAPI(3 , message, convertedNums);
+  
+                    var fn = APIChooser.Instance.AlertAPI(1 , message, convertedNums);
 
                     // if some numbers failed to get message
                     if (fn.Count > 0)
@@ -66,44 +105,52 @@ namespace MessagingTest
             }
             else
             {
-                // if a file is selected
-                if (filePath.Length > 0)
-                {
-                    string status;
-                    try
-                    {
-                        if (uploadSpace.PostedFile.ContentType == "image/jpeg")
-                        {
-                            uploadSpace.SaveAs(Server.MapPath("~/") + filePath);
-                            status = "File Uploaded";
+                SendFile();   
+            }            
+        }
 
-                        }
-                        else
-                        {
-                            status = "File not an image";
-                        }
-                    }
-                    catch (Exception)
+        /// <summary>
+        /// Upload file using given file name
+        /// </summary>
+        private void SendFile()
+        {
+            // if a file is selected
+            if (filePath.Length > 0)
+            {
+                string status;
+                try
+                {
+                    // must be image of JPEG format
+                    if (uploadSpace.PostedFile.ContentType == "image/jpeg")
                     {
-                        status = "File Upload Failed";
+                        uploadSpace.SaveAs(Server.MapPath("~/") + filePath);
+                        status = "File Uploaded";
                     }
-                    ScriptManager.RegisterStartupScript(this, GetType(), "myalert", "alert('"+status+"');", true);
-                    filePath = "";
+                    else
+                    {
+                        status = "File is not an image";
+                    }
                 }
+                catch (Exception)
+                {
+                    status = "File Upload Failed";
+                }
+                ScriptManager.RegisterStartupScript(this, GetType(), "myalert", "alert('" + status + "');", true);
+                filePath = "";
             }
         }
 
         // Create message box and list all failed phone numbers
         private void AlertFailedNumbers(List<string> fn)
         {
-            
+
             string strFn = "Failed numbers: " + fn[0];
 
             for (int i = 1; i < fn.Count; i++)
             {
                 strFn += ", " + fn[i];
             }
-            
+
             ScriptManager.RegisterStartupScript(this, GetType(), "myalert", "alert('" + strFn + "');", true);
         }
 
@@ -124,7 +171,8 @@ namespace MessagingTest
             if (numLength > 0 && newNum.Text.All(c => c >= '0' && c <= '9'))
             {
                 TextBox tb = new TextBox();
-                tb.ID = "enterPhone" + phoneHolderTBS.Count;
+                tb.ID = "enterPhone" + counter++;
+
                 tb.CssClass = "numberSpace";
                 tb.CausesValidation = false;
                 PhoneHolder.Instance.Add(tb);
@@ -134,14 +182,20 @@ namespace MessagingTest
                 to.ID = tb.ID + "label";
                 to.CssClass = "to";
 
+                var deleteBtn = new Button();
+                deleteBtn.Text = "X";
+                deleteBtn.ID = tb.ID + "button";
+                deleteBtn.CssClass = "delete";
+                deleteBtn.Click += new EventHandler(deleteBtn_Click);
+
                 phonePanel.Controls.Add(to);
                 phonePanel.Controls.Add(tb);
+                phonePanel.Controls.Add(deleteBtn);
             }
         }
 
         protected void removePhone_Click(object sender, EventArgs e)
         {
-    
             var box = PhoneHolder.Instance.RemoveLastElement();
 
             // if there is still more than 1 textboxes displayed
@@ -150,6 +204,9 @@ namespace MessagingTest
                 phonePanel.Controls.Remove(box);
                 Label to = (Label)phonePanel.FindControl(box.ID + "label");
                 phonePanel.Controls.Remove(to);
+
+                Button deleteBtn = (Button)phonePanel.FindControl(box.ID + "button");
+                phonePanel.Controls.Remove(deleteBtn);
             }
             // else remove any text on the first textbox
             else
@@ -158,39 +215,24 @@ namespace MessagingTest
             }
         }
 
-        /// <summary>
-        /// For each page load, read all the textboxes and label
-        /// to the page
-        /// </summary>
-        private void DrawTextBoxes()
+        protected void deleteBtn_Click(object sender, EventArgs e)
         {
-            firstTB = PhoneHolder.Instance.GetTBS()[0];
-            foreach (TextBox tb in PhoneHolder.Instance.GetTBS())
+            string id = (((Button)sender).ID).Replace("button", "");
+            TextBox tb = (TextBox)phonePanel.FindControl(id);
+
+            if (PhoneHolder.Instance.GetTBS().Count == 1)
             {
-                var to = new Label();
-                to.Text = "To: ";
-                to.ID = tb.ID + "label";
-                to.CssClass = "to";
-                phonePanel.Controls.Add(to);
-                phonePanel.Controls.Add(tb);
+                tb.Text = "";
             }
-        }
+            else
+            {
+                Label to = (Label)phonePanel.FindControl(id + "label");
 
-        protected void FileUploadComplete(object sender, EventArgs e)
-        {
-            filePath = Path.GetFileName(uploadSpace.FileName);
-        }
-
-        protected void text_CheckedChanged(object sender, EventArgs e)
-        {
-            messageBox.Style["display"] = "inline-block";
-            uploadSpace.Style["display"] = "none";
-        }
-
-        protected void file_CheckedChanged(object sender, EventArgs e)
-        {
-            messageBox.Style["display"] = "none";
-            uploadSpace.Style["display"] = "inline-block";
+                PhoneHolder.Instance.RemoveElement(tb);
+                phonePanel.Controls.Remove(tb);
+                phonePanel.Controls.Remove(to);
+                phonePanel.Controls.Remove(sender as Button);
+            }
         }
     }
 }

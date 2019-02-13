@@ -66,13 +66,17 @@
 .numberSpace {
     position:relative;
     left:10px;
-    width:270px;
+    width:240px;
     height:25px;
     font-size:18px;
 }
 
 .to {
-    position:relative;
-    left:10px;
+    float :left;
     font-size:25px;
+}
+
+.delete{
+    float:right;
+    height: 30px;
 }

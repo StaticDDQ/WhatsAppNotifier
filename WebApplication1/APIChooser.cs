@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace MessagingTest
 {
@@ -31,42 +28,52 @@ namespace MessagingTest
             whatsappAPI = new WhatsAppAPI();
         }
 
+        /*
+         * 1 - CloudRail
+         * 2 - Twilio
+         * 3 - Selenium
+         */
+
+        /// <summary>
+        /// Send message to 1 phone number
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="message"></param>
+        /// <param name="phoneNumber"></param>
+        /// <returns>true if message sent successfully</returns>
         public bool AlertAPI(int id, string message, string phoneNumber)
         {
-            bool isSuccess = false;
-
             switch (id)
             {
                 case 1:
-                    isSuccess = messageAPI.SendMessage(phoneNumber, message);
-                    break;
+                    return messageAPI.SendMessage(phoneNumber, message);
                 case 2:
-                    isSuccess = twilioApi.SendMessage(phoneNumber, message);
-                    break;
+                    return twilioApi.SendMessage(phoneNumber, message);
                 case 3:
-                    isSuccess = whatsappAPI.SendMessage(phoneNumber, message);
-                    break;
+                    return whatsappAPI.SendMessage(phoneNumber, message);
             }
-            return isSuccess;
+            return false;
         }
 
+        /// <summary>
+        /// Send message to 1 or more phone numbers
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="message"></param>
+        /// <param name="phoneNumbers"></param>
+        /// <returns>list of numbers that failed to receive message</returns>
         public List<string> AlertAPI(int id, string message, List<string> phoneNumbers)
         {
-            List<string> failedNumbers = new List<string>();
-
             switch (id)
             {
                 case 1:
-                    failedNumbers = messageAPI.SendMessage(phoneNumbers, message);
-                    break;
+                    return messageAPI.SendMessage(phoneNumbers, message);
                 case 2:
-                    failedNumbers = twilioApi.SendMessage(phoneNumbers, message);
-                    break;
+                    return twilioApi.SendMessage(phoneNumbers, message);
                 case 3:
-                    failedNumbers = whatsappAPI.SendMessage(phoneNumbers, message);
-                    break;
+                    return whatsappAPI.SendMessage(phoneNumbers, message);
             }
-            return failedNumbers;
+            return null;
         }
     }
 }
